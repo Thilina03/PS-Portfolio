@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCSCU Keynote Speeches - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Thilina Abeykoon - SA23367944</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#introduction" class="nav-link">Introduction</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contents" class="nav-link">Contents</a>
+                </li>
+                
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">ARCSCU KEYNOTE SPEECHES</h1>
+                <p class="page-date">08/07/2025</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="content-section">
+                    <h2>Lecture 05 - ARCSCU KEYNOTE SPEECHES</h2>
+                     <p> ARCSCU keynote speeches provided an inspiring platform for thought leaders and industry experts to share their insights, 
+                        experiences, and visions for the future. These speeches highlighted innovative ideas, practical strategies, and motivational messages, encouraging attendees to broaden their perspectives and embrace new opportunities. Each speaker delivered valuable guidance aimed at fostering personal growth, 
+                        professional development, and a deeper understanding of emerging trends in their respective fields.</p>
+                    <div id="pdf-gallery" class="pdf-gallery" aria-live="polite"></div>
+
+                    <h3 style="margin-top: 24px;">Images Preview</h3>
+                    <div class="image-gallery">
+                        <figure>
+                            <img src="rese1.jpg" alt="Research Conference key points - page image" loading="lazy">
+                        </figure>
+                        <figure>
+                            <img src="rese2.jpg" alt="Mr. Kalana Muthu Speech - page image" loading="lazy">
+                        </figure>
+                        <figure>
+                            <img src="rese3.jpg" alt="Dr. Edward Braund’s Presentation - page image" loading="lazy">
+                        </figure>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 Thilina Abeykoon. All rights reserved.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- PDF.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-2g5bovmpn/6H1s7VqkXv1r8k1gQ2o8m4hznv3w0a1l1wK1V3u7pCkH7yU8j3r0l2pQm1cG8m8xw7oG0bN0B1mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        (function() {
+            const container = document.getElementById('pdf-gallery');
+            if (!container || !window['pdfjsLib']) return;
+
+            // Configure PDF.js worker
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+            const pdfPath = 'sa23704534.pdf';
+            const loadingText = document.createElement('p');
+            loadingText.textContent = 'Loading PDF...';
+            container.appendChild(loadingText);
+
+            pdfjsLib.getDocument(pdfPath).promise.then(function(pdf) {
+                loadingText.remove();
+                const numPages = pdf.numPages;
+
+                const renderPage = (pageNumber) => {
+                    pdf.getPage(pageNumber).then(function(page) {
+                        const viewport = page.getViewport({ scale: 1.4 });
+                        const canvas = document.createElement('canvas');
+                        canvas.className = 'pdf-page-canvas';
+                        const context = canvas.getContext('2d');
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+
+                        const renderContext = { canvasContext: context, viewport: viewport };
+                        container.appendChild(canvas);
+                        page.render(renderContext);
+
+                        // Add page label below the image
+                        const caption = document.createElement('div');
+                        caption.className = 'pdf-page-caption';
+                        caption.textContent = 'Page ' + pageNumber + ' of ' + numPages;
+                        container.appendChild(caption);
+                    });
+                };
+
+                for (let i = 1; i <= numPages; i++) {
+                    renderPage(i);
+                }
+            }).catch(function(err) {
+                loadingText.textContent = 'Failed to load PDF. Please use the direct link above.';
+                console.error(err);
+            });
+        })();
+    </script>
+</body>
+</html>
